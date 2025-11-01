@@ -1,15 +1,15 @@
 # Ex.05 Design a Website for Server Side Processing
-## Date:26.10.2024
-## Name:MOHAMED FAIZAL M
-## Reg no:24000006
+
 
 ## AIM:
-To design a website to find surface area of a Right Cylinder in server side.
+ To design a website to calculate the power of a lamp filament in an incandescent bulb in the server side. 
+
 
 ## FORMULA:
-Surface Area = 2Πrh + 2Πr<sup>2</sup>
-<br>r --> Radius of Right Cylinder
-<br>h --> Height of Right Cylinder
+P = I<sup>2</sup>R
+<br> P --> Power (in watts)
+<br> I --> Intensity
+<br> R --> Resistance
 
 ## DESIGN STEPS:
 
@@ -32,112 +32,80 @@ Create a HTML file to implement form based input and output.
 Publish the website in the given URL.
 
 ## PROGRAM :
+
 ```
-<html>
 <head>
-<meta charset='utf-8'>
-<meta http-equiv='X-UA-Compatible' content='IE=edge'>
-<title>Area of Surface</title>
-<meta name='viewport' content='width=device-width, initial-scale=1'>
-<style type="text/css">
-body {
-    background-color: #f10a0af2;
-}
-.edge {
-    width: 100%;
-    padding-top: 180px;
-    text-align: center;
-}
-.box {
-    display: inline-block;
-    border: thick dashed #1a7c74;
-    width: 500px;
-    min-height: 300px;
-    font-size: 20px;
-    background-color: rgb(253, 9, 9);
-}
-.formelt {
-    color: black;
-    text-align: center;
-    margin-top: 8px;
-    margin-bottom: 6px;
-}
-h1 {
-    color: black;
-    padding-top: 20px;
-}
-</style>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>POWER OF LAMP IN INCANDESCENT BULD</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <style type="text/css">
+        .box {
+            display: block;
+            width: 500px;
+            min-height: 300px;
+            font-size: 20px;
+            background: rgb(21, 208, 215);
+            background: linear-gradient(90deg, rgb(99, 237, 118) 9%, rgb(193, 166, 202) 56%);
+            border-radius: 10px;
+            box-shadow: rgba(239, 5, 24, 0.35) 0px 5px 15px;
+        }
+
+        .formelt {
+            color: whitesmoke;
+            text-align: center;
+            margin-top: 7px;
+            margin-bottom: 6px;
+        }
+
+        h1 {
+            color: white;
+            text-align: center;
+            padding-top: 20px;
+        }
+        input{
+            margin: 5px;
+            padding: 5px;
+            border-radius: 5px;
+            border: none;
+
+        }
+    </style>
 </head>
+
 <body>
-<div class="edge">
-    <div class="box">
-        <h1>Surface Area of Right Cylinder</h1>
-        <h3>MOHAMED FAIZAL M(24000006)</h3>
-        <form method="POST">
-            {% csrf_token %}
-            <div class="formelt">
-                Radius: <input type="text" name="radius" value="{{r}}"></input>m<br/>
-            </div>
-            <div class="formelt">
-                Height: <input type="text" name="height" value="{{h}}"></input>m<br/>
-            </div>
-            <div class="formelt">
-                <input type="submit" value="Calculate"></input><br/>
-            </div>
-            <div class="formelt">
-                Area: <input type="text" name="area" value="{{area}}">m<sup>2</sup><br/>
-            </div>
-        </form>
+    <div class="edge">
+        <div class="box">
+            <h1>POWER OF LAMP IN INCANDESCENT BULB</h1>
+            <form method="POST">
+                {% csrf_token %}
+                <div class="formelt">
+                    INTENSITY : <input type="text" name="Intensity" value="{{I}}"></input>(in A)<br />
+                </div>
+                <div class="formelt">
+                    RESISITANCE : <input type="text" name="Resistence" value="{{R}}"></input>(in Ω)<br />
+                </div>
+                <div class="formelt">
+                    <input type="submit" value="Calculate"></input><br />
+                </div>
+                <div class="formelt">
+                    POWER : <input type="text" name="Power" value="{{Power}}"></input>W<br />
+                </div>
+            </form>
+        </div>
     </div>
-</div>
 </body>
+
 </html>
 ```
-```
-views.py
-from django.shortcuts import render
-def surfacearea(request):
-    context = {}
-    context['area'] = "0"
-    context['r'] = "0"
-    context['h'] = "0"
-    if request.method == 'POST':
-        print("POST method is used")
-        print('request.POST:', request.POST)
-        r = request.POST.get('radius', '0') 
-        h = request.POST.get('height', '0') 
-        print('radius =', r)
-        print('height =', h)
-        area = 2 * 3.14 * int(r) * int(h) + 2*3.14*int(r)*int(r)
-        context['area'] = area
-        context['r'] = r
-        context['h'] = h
-        print('Area =', area)
-    
-    return render(request, 'mathapp/math.html',context)
-```
-```
-urls.py
-from django.contrib import admin
-from django.urls import path
-from mathapp import views
-urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('surfacearea/',views.surfacearea,name="surfacearea"),
-    path('',views.surfacearea,name="surfcaearea")
-]
-```
-
 
 ## SERVER SIDE PROCESSING:
-![Screenshot 2024-10-26 092215](https://github.com/user-attachments/assets/937a6845-8dc4-424b-8ffd-b800fdfb0f46)
+<img width="1272" height="770" alt="Screenshot 2025-11-01 130355" src="https://github.com/user-attachments/assets/8b14cc7b-9f22-4b55-86e1-90587f2c9c43" />
 
 
 
 ## HOMEPAGE:
-![Screenshot 2024-10-26 091023](https://github.com/user-attachments/assets/b5cf898f-7375-4e85-8b5f-86a834842cea)
-
-
+<img width="1270" height="681" alt="Screenshot 2025-11-01 130418" src="https://github.com/user-attachments/assets/ef52c7a6-c2df-4523-a291-64729f730b3d" />
 
 ## RESULT:
 The program for performing server side processing is completed successfully.
